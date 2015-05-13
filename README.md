@@ -1,2 +1,2 @@
-# correct_dorade_metadata
-correct metadata info in dorade sweep files using standard tap
+# correct_coords
+Replace coordinates in sweep files
