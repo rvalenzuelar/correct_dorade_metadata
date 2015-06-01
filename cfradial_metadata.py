@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-# Replace coordinates in cfradial files
+# Replace some metadata values in cfradial files
 # 
 # See http://www.unidata.ucar.edu/software/netcdf/examples/programs/
 #
@@ -10,11 +10,11 @@
 import sys 
 
 # define function
-def replace_cfradial_coords( stdtape_filepath ):
+def replace_cfradial_metadata( stdtape_filepath ):
 
 	from netCDF4 import Dataset
 	import glob
-	import numpy as np 
+	# import numpy as np 
 	import pandas as pd	
 
 	# open standard tape file for reading
@@ -26,20 +26,28 @@ def replace_cfradial_coords( stdtape_filepath ):
 	stdtape_timestamp=pd.to_datetime(stdtape_secs+base_time,unit='s')
 	stdtape_lats=stdtape_file.variables['LAT'][:]
 	stdtape_lons=stdtape_file.variables['LON'][:]
+	stdtape_geo_alt=stdtape_file.variables['GEOPOT_ALT'][:]
+	stdtape_pres_alt=stdtape_file.variables['PRES_ALT'][:]
 
 	# close the file
 	stdtape_file.close()
 
-	# pandas dataframe for standar tape
-	d={'lats':stdtape_lats,'lons':stdtape_lons}
-	df_stdtape=pd.DataFrame(data=d,index=stdtape_timestamp)
+	# creates dictionary
+	dict_stdtape={	'lats':stdtape_lats,
+			'lons':stdtape_lons,
+			'galt': stdtape_geo_alt,
+			'palt': stdtape_pres_alt}
+	
+	# pandas dataframe for standar tape		
+	df_stdtape=pd.DataFrame(data=dict_stdtape,index=stdtape_timestamp)
 
-	# get a list cfradial files
+	# get a list cfradial files in the current directory
+	# (bash script changes current directory)
 	nclist = glob.glob('cfrad.*')
 	nlist=len(nclist)
 	print "Folder contains ",str(nlist)," cfradial files"
 
-	for f in np.arange(nlist):
+	for f in range(nlist):
 		# open cfradial file for reading and writing
 		print 'Processing: '+nclist[f]
 		cfrad_file = Dataset(nclist[f],'r+') 
@@ -58,25 +66,42 @@ def replace_cfradial_coords( stdtape_filepath ):
 		unique_timestamp=cfrad_timestamp.drop_duplicates()
 		nstamps=unique_timestamp.nunique()
 
-		# cfradial coordinates
+		# cfradial information
 		cfrad_lats = cfrad_file.variables['latitude'][:]
 		cfrad_lons = cfrad_file.variables['longitude'][:]
+		cfrad_altitude = cfrad_file.variables['altitude'][:]
+		cfrad_altitude_agl = cfrad_file.variables['altitude_agl'][:]
 
-		# pandas dataframe for cfradial file
-		d={'lats':cfrad_lats,'lons':cfrad_lons}
-		df_cfrad=pd.DataFrame(data=d,index=cfrad_timestamp)
+		# creates dictionary
+		dict_cfrad = {	'lats':cfrad_lats,
+				'lons':cfrad_lons,
+				'alt': cfrad_altitude,
+				'alt_agl': cfrad_altitude_agl }
+
+		# pandas dataframe for cfradial file	
+		df_cfrad=pd.DataFrame(data=dict_cfrad,index=cfrad_timestamp)
 		df_cfrad_new=df_cfrad.copy()
 
-		for t in np.arange(nstamps):
+		for t in range(nstamps):
 			timestamp=str(unique_timestamp[t])
+
+			# from std_tape
 			new_lats=df_stdtape[timestamp]['lats']
 			new_lons=df_stdtape[timestamp]['lons']
+			new_galts=df_stdtape[timestamp]['galt']
+			new_palts=df_stdtape[timestamp]['palt']
+
+			# to cfradial
 			df_cfrad_new.loc[timestamp,'lats']=new_lats
 			df_cfrad_new.loc[timestamp,'lons']=new_lons
+			df_cfrad_new.loc[timestamp,'altitude']=new_palts
+			df_cfrad_new.loc[timestamp,'altitude_agl']=new_galts
 
 		cfrad_file.variables['latitude'][:]=df_cfrad_new['lats'].values
 		cfrad_file.variables['longitude'][:]=df_cfrad_new['lons'].values
-
+		cfrad_file.variables['altitude'][:]=df_cfrad_new['altitude'].values
+		cfrad_file.variables['altitude_agl'][:]=df_cfrad_new['altitude_agl'].values
+		
 		# print ''
 		# print df_cfrad['lats'].values
 		# print ''
@@ -90,4 +115,4 @@ def replace_cfradial_coords( stdtape_filepath ):
 
 # call function
 stdtape=sys.argv[1]
-replace_cfradial_coords(stdtape)
+replace_cfradial_metadata(stdtape)

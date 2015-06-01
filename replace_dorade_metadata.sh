@@ -22,17 +22,17 @@
 # OUTDIR="$HOME/P3/dorade/case03_coords_cor/leg03_new"
 
 #--------------------------------
-# INDIR="$HOME/P3_v2/dorade/c03/leg01_all"
-INDIR="$HOME/P3_v2/dorade/c03/leg03_all"
+INDIR="$HOME/P3_v2/dorade/c03/leg01_all"
+# INDIR="$HOME/P3_v2/dorade/c03/leg03_all"
 
 # standard tape file
 #---------------------------
-# STDTAPE="$HOME/Github/correct_coords/010125I.nc"
-STDTAPE="$HOME/Github/correct_coords/010123I.nc"
+# STDTAPE="$HOME/Github/correct_dorade_metadata/010125I.nc"
+STDTAPE="$HOME/Github/correct_dorade_metadata/010123I.nc"
 
 # python function
 #---------------------------
-PYFUN="$HOME/Github/correct_coords/replace_cfradial_coords.py"
+PYFUN="$HOME/Github/correct_dorade_metadata/cfradial_metadata.py"
 
 # dorade outdir
 #---------------------
@@ -109,7 +109,7 @@ echo " Running replace_cfradial_coords.py"
 echo
 python $PYFUN $STDTAPE
 echo 
-echo " Coordinates replaced"
+echo " Metadata replaced"
 echo
 echo " Cleaning and moving files to $OUTDIR"
 mv cfrad.* $CFDIR
