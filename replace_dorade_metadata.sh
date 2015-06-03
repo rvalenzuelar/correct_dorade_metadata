@@ -22,26 +22,24 @@
 # OUTDIR="$HOME/P3/dorade/case03_coords_cor/leg03_new"
 
 #--------------------------------
-INDIR="$HOME/P3_v2/dorade/c03/leg01_all"
+# INDIR="$HOME/P3_v2/dorade/c03/leg01_all"
 # INDIR="$HOME/P3_v2/dorade/c03/leg03_all"
+# INDIR="$HOME/P3_v2/dorade/c03/leg05_all"
+# INDIR="$HOME/P3_v2/dorade/c03/leg14_all"
+INDIR="$HOME/P3_v2/dorade/c04/leg10_all"
+
+OUTDIR="${INDIR/all/cor}"
+CFDIR="${OUTDIR/dorade/cfrad}"
 
 # standard tape file
 #---------------------------
-# STDTAPE="$HOME/Github/correct_dorade_metadata/010125I.nc"
-STDTAPE="$HOME/Github/correct_dorade_metadata/010123I.nc"
+# STDTAPE="$HOME/Github/correct_dorade_metadata/010123I.nc"
+STDTAPE="$HOME/Github/correct_dorade_metadata/010125I.nc"
 
 # python function
 #---------------------------
 PYFUN="$HOME/Github/correct_dorade_metadata/cfradial_metadata.py"
 
-# dorade outdir
-#---------------------
-# OUTDIR="$HOME/P3_v2/dorade/c03/leg03_cor"
-OUTDIR="${INDIR/all/cor}"
-
-# cfradial outdir
-#-------------------------
-CFDIR="${OUTDIR/dorade/cfrad}"
 
 # check existence of directories
 #------------------------------------------------
