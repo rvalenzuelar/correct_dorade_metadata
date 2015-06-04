@@ -86,10 +86,15 @@ def replace_cfradial_metadata( stdtape_filepath ):
 			timestamp=str(unique_timestamp[t])
 
 			# from std_tape
-			new_lats=df_stdtape[timestamp]['lats']
-			new_lons=df_stdtape[timestamp]['lons']
-			new_galts=df_stdtape[timestamp]['galt']
-			new_palts=df_stdtape[timestamp]['palt']
+			try:
+				new_lats=df_stdtape[timestamp]['lats']
+				new_lons=df_stdtape[timestamp]['lons']
+				new_galts=df_stdtape[timestamp]['galt']
+				new_palts=df_stdtape[timestamp]['palt']
+			except:
+				print "\nERROR: check STDTAPE file is correct"
+				cfrad_file.close()
+				sys.exit(1)
 
 			# to cfradial
 			df_cfrad_new.loc[timestamp,'lats']=new_lats

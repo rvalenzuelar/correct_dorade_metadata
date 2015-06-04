@@ -22,21 +22,21 @@
 # OUTDIR="$HOME/P3/dorade/case03_coords_cor/leg03_new"
 
 #--------------------------------
-# INDIR="$HOME/P3_v2/dorade/c03/leg01_all"
+INDIR="$HOME/P3_v2/dorade/c03/leg01_all"
 # INDIR="$HOME/P3_v2/dorade/c03/leg03_all"
 # INDIR="$HOME/P3_v2/dorade/c03/leg05_all"
 # INDIR="$HOME/P3_v2/dorade/c03/leg14_all"
 
 # INDIR="$HOME/P3_v2/dorade/c04/leg10_all"
-INDIR="$HOME/P3_v2/dorade/c04/leg11_all"
+# INDIR="$HOME/P3_v2/dorade/c04/leg11_all"
 
 OUTDIR="${INDIR/all/cor}"
 CFDIR="${OUTDIR/dorade/cfrad}"
 
 # standard tape file
 #---------------------------
-# STDTAPE="$HOME/Github/correct_dorade_metadata/010123I.nc"
-STDTAPE="$HOME/Github/correct_dorade_metadata/010125I.nc"
+STDTAPE="$HOME/Github/correct_dorade_metadata/010123I.nc"
+# STDTAPE="$HOME/Github/correct_dorade_metadata/010125I.nc"
 
 # python function
 #---------------------------
@@ -108,6 +108,9 @@ cd $RDXOUT
 echo " Running replace_cfradial_coords.py"
 echo
 python $PYFUN $STDTAPE
+if [ $? != 0 ]; then
+	exit
+fi
 echo 
 echo " Metadata replaced"
 echo
