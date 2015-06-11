@@ -22,8 +22,8 @@
 # OUTDIR="$HOME/P3/dorade/case03_coords_cor/leg03_new"
 
 #--------------------------------
-INDIR="$HOME/P3_v2/dorade/c03/leg01_all"
-# INDIR="$HOME/P3_v2/dorade/c03/leg03_all"
+# INDIR="$HOME/P3_v2/dorade/c03/leg01_all"
+INDIR="$HOME/P3_v2/dorade/c03/leg03_all"
 # INDIR="$HOME/P3_v2/dorade/c03/leg05_all"
 # INDIR="$HOME/P3_v2/dorade/c03/leg14_all"
 
@@ -72,7 +72,7 @@ if [ "$out_flag" = true ]; then
 		echo " Overwriting"
 		echo
 		cd $OUTDIR
-		nfiles="$(ls -1 | wc -l)"
+		nfiles="$(find -name 'swp.*' | wc -l)"
 		if [ "${nfiles}" != 0 ];then
 			rm swp.*
 		fi				
