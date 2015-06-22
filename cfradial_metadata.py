@@ -8,14 +8,12 @@
 # April, 2015
 
 import sys 
+from netCDF4 import Dataset
+import glob
+import pandas as pd	
 
 # define function
 def replace_cfradial_metadata( stdtape_filepath ):
-
-	from netCDF4 import Dataset
-	import glob
-	# import numpy as np 
-	import pandas as pd	
 
 	# open standard tape file for reading
 	stdtape_file = Dataset(stdtape_filepath,'r') 
