@@ -10,9 +10,9 @@
 #---------------------------
 
 # INDIR="$HOME/P3_v2/dorade/c03/leg01_all"
-INDIR="$HOME/P3_v2/dorade/c03/leg03_all"
+# INDIR="$HOME/P3_v2/dorade/c03/leg03_all"
 # INDIR="$HOME/P3_v2/dorade/c03/leg05_all"
-# INDIR="$HOME/P3_v2/dorade/c03/leg14_all"
+INDIR="$HOME/P3_v2/dorade/c03/leg14_all"
 
 # INDIR="$HOME/P3_v2/dorade/c04/leg10_all"
 # INDIR="$HOME/P3_v2/dorade/c04/leg11_all"
