@@ -9,21 +9,13 @@
 # I/O  dorade directories
 #---------------------------
 
-# INDIR="$HOME/P3_v2/dorade/c03/leg01_all"
-# INDIR="$HOME/P3_v2/dorade/c03/leg03_all"
-# INDIR="$HOME/P3_v2/dorade/c03/leg05_all"
-# INDIR="$HOME/P3_v2/dorade/c03/leg14_all"
-
-INDIR="$HOME/P3_v2/dorade/c04/leg10_all"
-# INDIR="$HOME/P3_v2/dorade/c04/leg11_all"
-
+INDIR="$HOME/P3_v2/dorade/c03/leg05_all"
 OUTDIR="${INDIR/all/cor}"
 CFDIR="${OUTDIR/dorade/cfrad}"
 
 # standard tape file
 #---------------------------
-# STDTAPE="$HOME/Github/correct_dorade_metadata/010123I.nc"
-STDTAPE="$HOME/Github/correct_dorade_metadata/010125I.nc"
+STDTAPE="$HOME/Github/correct_dorade_metadata/010123I.nc"
 
 # python function
 #---------------------------
