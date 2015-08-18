@@ -95,6 +95,10 @@ def replace_cfradial_metadata( stdtape_filepath ):
 				sys.exit(1)
 
 			# to cfradial
+			# since the 'altitude' field does not exist in dict_cfrad
+			# pandas creates a new column (field). See if it's more
+			# efficient creating a dict_cfrad with 'altitude' and
+			# 'altitude_agl' fields
 			df_cfrad_new.loc[timestamp,'lats']=new_lats
 			df_cfrad_new.loc[timestamp,'lons']=new_lons
 			df_cfrad_new.loc[timestamp,'altitude']=new_palts
