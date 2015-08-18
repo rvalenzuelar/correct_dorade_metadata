@@ -10,7 +10,8 @@
 #---------------------------
 
 INDIR="$HOME/P3_v2/dorade/c03/leg01_all"
-OUTDIR="${INDIR/all/cor}"
+# OUTDIR="${INDIR/all/cor}"
+OUTDIR="$HOME/P3_v2/dorade/c03/foo"
 CFDIR="${OUTDIR/dorade/cfrad}"
 
 # standard tape file
