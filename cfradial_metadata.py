@@ -65,11 +65,14 @@ def replace_cfradial_metadata( stdtape_filepath ):
 		# create timestamp2 to miliseconds precision
 		foo=[math.modf(x) for x in cfrad_time]
 		f=zip(*foo) # unpair list of tuples
-		ms = np.asarray(f[0])*100
+		ms = np.asarray(f[0])*1000
 		s = f[1]
 		cfrad_ms=pd.to_timedelta(ms,unit='ms')
 		cfrad_s=pd.to_timedelta(s,unit='s')		
 		cfrad_timestamp2=cfrad_start_datetime+cfrad_s+cfrad_ms
+
+		print cfrad_timestamp2.values
+		exit()
 
 		# remove duplicated timestamps (str type)
 		unique_timestamp=cfrad_timestamp.drop_duplicates()
