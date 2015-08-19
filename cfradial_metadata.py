@@ -71,9 +71,6 @@ def replace_cfradial_metadata( stdtape_filepath ):
 		cfrad_s=pd.to_timedelta(s,unit='s')		
 		cfrad_timestamp2=cfrad_start_datetime+cfrad_s+cfrad_ms
 
-		print cfrad_timestamp2.values
-		exit()
-
 		# remove duplicated timestamps (str type)
 		unique_timestamp=cfrad_timestamp.drop_duplicates()
 		nstamps=unique_timestamp.nunique()
