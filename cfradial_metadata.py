@@ -11,6 +11,8 @@ import sys
 from netCDF4 import Dataset
 import glob
 import pandas as pd	
+import math
+import numpy as np
 
 # define function
 def replace_cfradial_metadata( stdtape_filepath ):
@@ -59,8 +61,17 @@ def replace_cfradial_metadata( stdtape_filepath ):
 		cfrad_time = cfrad_file.variables['time'][:]
 		cfrad_secs=pd.to_timedelta(cfrad_time.astype(int),unit='s')
 		cfrad_timestamp=cfrad_start_datetime+cfrad_secs
+		
+		# create timestamp2 to miliseconds precision
+		foo=[math.modf(x) for x in cfrad_time]
+		f=zip(*foo) # unpair list of tuples
+		ms = np.asarray(f[0])*100
+		s = f[1]
+		cfrad_ms=pd.to_timedelta(ms,unit='ms')
+		cfrad_s=pd.to_timedelta(s,unit='s')		
+		cfrad_timestamp2=cfrad_start_datetime+cfrad_s+cfrad_ms
 
-		# remove duplicated timestamps (str)
+		# remove duplicated timestamps (str type)
 		unique_timestamp=cfrad_timestamp.drop_duplicates()
 		nstamps=unique_timestamp.nunique()
 
